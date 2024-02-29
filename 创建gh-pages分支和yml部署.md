@@ -35,7 +35,7 @@ echo.>.github\workflows\sync-branches.yml
 
 ### 步骤4：编辑Workflow文件
 
-打开`.github\workflows\sync-branches.yml`文件进行编辑。您可以使用任何文本编辑器，如Notepad++、VSCode等。将以下内容粘贴到文件中：
+打开`.github\workflows\sync-branches.yml`文件进行编辑。您可以使用任何文本编辑器，如Notepad++、VSCode等。将以下内容粘贴到文件中(只要更改一下邮箱和用户名就行)：
 
 ```yaml
 name: Sync gh-pages with main branch
@@ -51,8 +51,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
     - name: Set up Git config
       run: |
         git config --global user.email "you@example.com"
@@ -78,3 +76,45 @@ git push origin main
 ```
 
 完成以上步骤后，每次您向`main`分支推送更新时，GitHub Actions就会自动触发此workflow，同步更改到`gh-pages`分支。这样，您的GitHub Pages站点将自动更新以反映`main`分支的最新内容。
+<br>
+<br>
+<br>
+
+### 步骤4-1：编辑Workflow文件
+- 更新过的：
+```yaml
+name: Sync gh-pages with main branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.5
+      with:
+        branch: gh-pages # 指定了部署目标分支，即 GitHub Actions 将会把内容部署到 gh-pages 分支。
+        folder: . # 指定了源文件夹，即 GitHub Actions 将会从你的仓库中的 public 文件夹获取内容进行部署。
+```
+<br>
+<br>
+
+`uses: JamesIves/github-pages-deploy-action@4.1.5`相当于  
+```   
+- name: Set up Git config
+  run: |
+    git config --global user.email "you@example.com"
+    git config --global user.name "Your GitHub Username"
+- name: Push changes to gh-pages
+  run: |
+    git fetch --all
+    git checkout gh-pages || git checkout -b gh-pages
+    git merge main --allow-unrelated-histories -m "Merge main to gh-pages"
+    git push origin gh-pages
+```

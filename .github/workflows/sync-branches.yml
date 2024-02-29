@@ -11,16 +11,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.5
       with:
-        ref: main
-        fetch-depth: 0 # Important: this will fetch all history for all branches and tags
-    - name: Set up Git config
-      run: |
-        git config --global user.email "wwangyu320@gmail.com"
-        git config --global user.name "wwangyu2"
-    - name: Push changes to gh-pages
-      run: |
-        git fetch --all
-        git checkout gh-pages || git checkout -b gh-pages
-        git merge main --allow-unrelated-histories -m "Merge main to gh-pages"
-        git push origin gh-pages
+        branch: gh-pages # 指定了部署目标分支，即 GitHub Actions 将会把内容部署到 gh-pages 分支。
+        folder: . # 指定了源文件夹，即 GitHub Actions 将会从你的仓库中的 public 文件夹获取内容进行部署。
