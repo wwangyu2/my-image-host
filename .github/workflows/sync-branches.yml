@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+      
+permissions:  # 添加权限配置
+  contents: write
 
 jobs:
   sync-gh-pages:
@@ -15,4 +18,4 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@4.1.5
       with:
         branch: gh-pages # 指定了部署目标分支，即 GitHub Actions 将会把内容部署到 gh-pages 分支。
-        folder: . # 指定了源文件夹，即 GitHub Actions 将会从你的仓库中的 public 文件夹获取内容进行部署。
+        folder: . # 指定了源文件夹，即 GitHub Actions 将会从你的仓库中你这指定文件夹获取内容进行部署。
