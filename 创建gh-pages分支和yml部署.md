@@ -217,3 +217,13 @@ jobs:
     git merge main --allow-unrelated-histories -m "Merge main to gh-pages"
     git push origin gh-pages
 ```
+
+
+
+
+
+
+
+- 是的，crazy-max/ghaction-github-pages@v4 和 JamesIves/github-pages-deploy-action@4.1.5 都是用于自动化部署内容到GitHub Pages的GitHub Actions。   
+- 它们提供了类似的功能，允许用户将构建的静态网站内容自动部署到指定的GitHub Pages分支（通常是gh-pages）。   
+- 当您在main分支构建内容，并将生成的静态文件推送到gh-pages分支进行部署时，这意味着您的构建过程是在GitHub上完成的，而不是在Cloudflare Pages上。在这种情况下，您实际上在Cloudflare Pages中不需要选择一个特定的框架预设，因为您已经有了构建好的静态文件。     
