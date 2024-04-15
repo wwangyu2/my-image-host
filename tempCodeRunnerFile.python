@@ -1,9 +1,0 @@
-import requests
-
-headers = {
-    'Authorization': 'Bearer _UFNCmc_olMxjgqf5ICi0IS-ZFbYhiG6AX_eg4x2',
-    'Content-Type': 'application/json',
-}
-
-response = requests.get('https://api.cloudflare.com/client/v4/user/tokens/verify', headers=headers)
-print(response.json())
